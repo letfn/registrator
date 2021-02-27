@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function main {
+  set -a
+  source /secrets/.env
+  set +a
+
+  exec /bin/registrator \
+    -internal=true \
+    consul://${CONSUL_IP:-169.254.32.1}:8500 "$@"
+}
+
+main "$@"
